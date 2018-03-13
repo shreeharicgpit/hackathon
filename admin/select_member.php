@@ -1,6 +1,4 @@
-<?php
-
- include('header.php');
+<?php include('header.php');
   include('connect.php');
 
 
@@ -28,13 +26,12 @@
   	$result=mysqli_query($conn,$sql) or die("error in insert");
   }
 ?>
-
-
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h2>User Directory</h2>
+
               </div>
             </div>
 
@@ -52,8 +49,12 @@
                     <div class="clearfix"></div>
                   </div>
                    <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Grouped</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Grouped
+
+
+
+                            </label>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
                               <select class="select2_group form-control">
                                 <optgroup label="DEPARTMENT OF ADHAR">
                                   <option value="AK">head</option>
@@ -65,57 +66,30 @@
                                   <option value="OR">Oregon</option>
                                   <option value="WA">Washington</option>
                                 </optgroup>
-                                <optgroup label="Mountain Time Zone">
-                                  <option value="AZ">Arizona</option>
-                                  <option value="CO">Colorado</option>
-                                  <option value="ID">Idaho</option>
-                                  <option value="MT">Montana</option>
-                                  <option value="NE">Nebraska</option>
-                                  <option value="NM">New Mexico</option>
-                                  <option value="ND">North Dakota</option>
-                                  <option value="UT">Utah</option>
-                                  <option value="WY">Wyoming</option>
-                                </optgroup>
-                                <optgroup label="Central Time Zone">
-                                  <option value="AL">Alabama</option>
-                                  <option value="AR">Arkansas</option>
-                                  <option value="IL">Illinois</option>
-                                  <option value="IA">Iowa</option>
-                                  <option value="KS">Kansas</option>
-                                  <option value="KY">Kentucky</option>
-                                  <option value="LA">Louisiana</option>
-                                  <option value="MN">Minnesota</option>
-                                  <option value="MS">Mississippi</option>
-                                  <option value="MO">Missouri</option>
-                                  <option value="OK">Oklahoma</option>
-                                  <option value="SD">South Dakota</option>
-                                  <option value="TX">Texas</option>
-                                  <option value="TN">Tennessee</option>
-                                  <option value="WI">Wisconsin</option>
-                                </optgroup>
-                                <optgroup label="Eastern Time Zone">
-                                  <option value="CT">Connecticut</option>
-                                  <option value="DE">Delaware</option>
-                                  <option value="FL">Florida</option>
-                                  <option value="GA">Georgia</option>
-                                  <option value="IN">Indiana</option>
-                                  <option value="ME">Maine</option>
-                                  <option value="MD">Maryland</option>
-                                  <option value="MA">Massachusetts</option>
-                                  <option value="MI">Michigan</option>
-                                  <option value="NH">New Hampshire</option>
-                                  <option value="NJ">New Jersey</option>
-                                  <option value="NY">New York</option>
-                                  <option value="NC">North Carolina</option>
-                                  <option value="OH">Ohio</option>
-                                  <option value="PA">Pennsylvania</option>
-                                  <option value="RI">Rhode Island</option>
-                                  <option value="SC">South Carolina</option>
-                                  <option value="VT">Vermont</option>
-                                  <option value="VA">Virginia</option>
-                                  <option value="WV">West Virginia</option>
-                                </optgroup>
+                               
+                               
                               </select>
+
+                            </div>
+                          </div>
+                   <div class="form-group">
+                          
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                              <select class="select2_group form-control">
+                                <optgroup label="DEPARTMENT OF ADHAR">
+                                  <option value="AK">head</option>
+                                  <option value="HI">member</option>
+                                </optgroup>
+                                <optgroup label="Pacific Time Zone">
+                                  <option value="CA">California</option>
+                                  <option value="NV">Nevada</option>
+                                  <option value="OR">Oregon</option>
+                                  <option value="WA">Washington</option>
+                                </optgroup>
+                               
+                               
+                              </select>
+
                             </div>
                           </div>
 
@@ -126,15 +100,21 @@
                         <thead>
                           <tr class="headings">
                             <th>
-                              <input type="checkbox" id="check-all" class="flat">
+                              
+                                <input type="checkbox" id="check-all" class="select" >
+
+                          
+                              
                             </th>
                             <th class="column-title">Name</th>
                             <th class="column-title">Email</th>
                             <th class="column-title">Phone_no</th>
                             <th class="column-title">Department</th>
                             <th class="column-title">Designation</th>
+                            <?php if(!isset($_POST['Invite'])){?>
                             <th class="column-title no-link last">Action
                             </th>
+                          <?php } ?>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                             </th>
@@ -150,44 +130,124 @@
                               ?>
                           <tr class="even pointer">
                             <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
+                              <input type="checkbox" class="record" value="<?=$row['user_id']?>" name="table_records">
                             </td>
                             <td class=" "><?php echo $row['name']; ?></td>
                             <td class=" "><?php echo $row['email']; ?></td>
                             <td class=" "><?php echo $row['mobile']; ?></td>
                             <td class=" "><?php echo $row['department']; ?></td>
                             <td class=" "><?php echo $row['designation']; ?></td>
-                            <td class=" last">
-                            <a href="view_profile.php?id=<?php echo $row['user_id'];?>" class="fa fa-eye">&nbsp;View &nbsp;&nbsp;</a>
-                            <a href="view_profile.php?id=<?php echo $row['user_id'];?>" class="fa fa-edit">&nbsp;Update&nbsp;&nbsp;</a>
-                            <a href="view_directory.php?delete_id=<?php echo $row['user_id']?>" onclick="return confirm('Are you sure?')" class="fa fa-trash">&nbsp;Delete</a>
+
+                            <?php if(!isset($_POST['Invite'])):?>
+                            <td class=" last"><a href="#"class="fa fa-eye">&nbsp;View &nbsp;&nbsp;</a><a href="#" class="fa fa-edit">&nbsp;update&nbsp;&nbsp;</a><a href="#"class="fa fa-trash">&nbsp;delete</a></td>
                             </td>
-                            </td>
+                          <?php endif;?>
                           </tr>
                           <?php
                             }
                           
                           ?>
                         </tbody>
-                      </table>
-                    </div>
 
+                      </table>
 
                   </div>
+                 
+                    </div>
+                   
+
                 </div>
               </div>
             </div>
+             <ul class="pager">
+                      <li><a href="#">Previous</a></li>
+                      <li><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                      <li><a href="#">Next</a></li>
+                    </ul>
+
+                   <?php if(isset($_POST['Invite'])):?>
+                              <form action="confirm_invitation.php" method="post">
+                            <input type="hidden" value="" id="checkvalue" name="selected">
+                            <input type="submit" name="submit" value="next" class="btn btn-success"
+                            style="float:right">
+                          </form><?php endif;?> 
           </div>
         </div>
 <?php include('footer.php'); ?>
-<?php
-if(isset($_GET['delete_id']))
-{
-        $id=$_GET['delete_id'];
-        $result=mysqli_query($conn,"delete from directory where user_id='$id'");
-        header("location:view_directory.php");
-   
 
-}
 
-?>
+
+<script type="text/javascript">
+
+  
+
+  
+  $(document).ready(function(){
+
+    
+    $(".record").click(function(){
+
+      
+     
+var val=new Array();
+
+      $('.record:checked').each(function(){
+       val.push($(this).val());
+      });
+      var count=0;
+      $('.record:not(:checked)').each(function(){
+        count++;
+      });
+     
+      if(count!=0)
+      {
+        $('#check-all').removeAttr('checked');
+       
+      }
+      if(count==0)
+      {
+       
+        $('#check-all').prop('checked',true);
+        
+      }
+
+      $("#checkvalue").val(val);
+
+    });
+
+
+    $('#check-all').click(function(){
+
+     
+       if($('#check-all').is(":checked"))
+      {
+          $(".record").each(function(){
+              $(this).prop('checked',true);
+          });
+          var val=new Array();
+      $('.record:checked').each(function(){
+
+        val.push($(this).val());
+       $("#checkvalue").val(val);
+
+        
+      });
+
+     
+      }
+      else
+      {
+          $(".record").each(function(){
+              $(this).removeAttr('checked');
+              $("#checkvalue").val(val);
+          });
+
+      }
+    });
+
+
+  });
+
+</script>

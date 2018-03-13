@@ -7,10 +7,6 @@ if(isset($_POST['next']))
   $meeting_date=$_POST['meeting_date'];
   $meeting_start_time=$_POST['meeting_start_time'];
 }
-
-
-
-
 ?>
 <div class="right_col" role="main">
 	<h2>Meeting Details:</h2>

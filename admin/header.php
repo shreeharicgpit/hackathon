@@ -82,7 +82,7 @@
                   <li><a><i class="fa fa-edit"></i> Meeting Managment <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="schedule_meeting.php">Schedule Meeting</a></li>
-                      <li><a href="">Update Schedule</a></li>
+                      <li><a href="meeting_update.php">Update Schedule</a></li>
                       <li><a href="meeting_details.php">Generate meeting report</a></li>
                     </ul>
                   </li>
@@ -90,7 +90,7 @@
                     <ul class="nav child_menu">
                       <li><a href="add_department.php">Add department</a></li>
                       <li><a href="view_department.php">View department </a></li>
-                    
+
                     </ul>
                   </li>
 
