@@ -12,7 +12,7 @@ include('connect.php')
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th>No</th>
+                          <th>o</th>
                           <th>Department Name</th>
                         </tr>
                       </thead>
