@@ -1,4 +1,5 @@
-<?php include('header.php');
+<?php 
+include('header.php');
   include('connect.php');
 
 
@@ -23,7 +24,11 @@
   		$status="Upcoming";
   	}
   	 $sql="insert into meeting(title,description,date,time,status,keypoint)values('$meeting_title','$meeting_description','$meeting_date','$meeting_start_time','$status','$meeting_keypoints')";
-  	$result=mysqli_query($conn,$sql) or die("error in insert");
+    echo $sql1="select * from meeting where title='$meeting_title' and description='$meeting_description' and date='$meeting_date' and time='$meeting_start_time'and status='$status'and keypoint='$meeting_keypoints' ";
+     $result1=mysqli_query($conn,$sql1);
+     $row=mysqli_fetch_assoc($result1);
+  	 $code=$row['meeting_code'];
+    $result=mysqli_query($conn,$sql) or die("error in insert");
   }
 ?>
         <div class="right_col" role="main">
@@ -170,6 +175,7 @@
                    <?php if(isset($_POST['Invite'])):?>
                               <form action="confirm_invitation.php" method="post">
                             <input type="hidden" value="" id="checkvalue" name="selected">
+                            <input type="text" value="<?=$code?>"  name="meeting_code">
                             <input type="submit" name="submit" value="next" class="btn btn-success"
                             style="float:right">
                           </form><?php endif;?> 

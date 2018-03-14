@@ -17,7 +17,7 @@ if(isset($_POST['next']))
                     <div class="x_content">
 
                                             <!-- start form for validation -->
-                                            <form id="demo-form" data-parsley-validate method="post" action="view_directory.php">
+                                            <form id="demo-form" data-parsley-validate method="post" action="select_member.php">
                                             <label for="meet_date_and_time">Meeting Date*:</label>
                                               	<input type="text" id="date_and_time" class="form-control" name="meeting_date" value="<?=@$meeting_date?>"  />
 																								<label for="meet_date_and_time">Meeting Time*:</label>
