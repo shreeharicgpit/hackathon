@@ -15,8 +15,6 @@ if(isset($_POST['next']))
                 <div class="row">
                   <div class="col-md-6 col-xs-12">
                     <div class="x_content">
-
-                                            <!-- start form for validation -->
                                             <form id="demo-form" data-parsley-validate method="post" action="select_member.php">
                                             <label for="meet_date_and_time">Meeting Date*:</label>
                                               	<input type="text" id="date_and_time" class="form-control" name="meeting_date" value="<?=@$meeting_date?>"  />
@@ -32,7 +30,7 @@ if(isset($_POST['next']))
                                                   <textarea id="meet_keypoints" required class="form-control" name="meeting_keypoints" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
                                                     data-parsley-validation-threshold="10"></textarea>
 
-                                          </div>
+                                </div>
                     <div class="well" style="overflow: auto">
                                           <div class="col-md-5">
                                             <h2>Venue</h2>

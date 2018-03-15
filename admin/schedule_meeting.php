@@ -1,9 +1,7 @@
-<?php include('header.php');
+<?php
+include('header.php');
 include('connect.php');
-
-
 ?>
-
         <div class="right_col" role="main">
           <div class="">
             <div class="row">

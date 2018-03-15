@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('header.php');
   include('connect.php');
 
@@ -24,12 +24,21 @@ include('header.php');
   		$status="Upcoming";
   	}
   	 $sql="insert into meeting(title,description,date,time,status,keypoint)values('$meeting_title','$meeting_description','$meeting_date','$meeting_start_time','$status','$meeting_keypoints')";
-    echo $sql1="select * from meeting where title='$meeting_title' and description='$meeting_description' and date='$meeting_date' and time='$meeting_start_time'and status='$status'and keypoint='$meeting_keypoints' ";
+     $result=mysqli_query($conn,$sql) or die("error in insert");
+     $sql1="select * from meeting where title='$meeting_title' and description='$meeting_description' and date='$meeting_date' and time='$meeting_start_time' and status='$status'and keypoint='$meeting_keypoints' ";
      $result1=mysqli_query($conn,$sql1);
      $row=mysqli_fetch_assoc($result1);
   	 $code=$row['meeting_code'];
-    $result=mysqli_query($conn,$sql) or die("error in insert");
+
   }
+?>
+<?php
+
+if(isset($_POST['back']))
+{
+  $carray=explode(",", $_POST['select']);
+  $code=$_POST['meeting_code'];
+}
 ?>
         <div class="right_col" role="main">
           <div class="">
@@ -71,14 +80,14 @@ include('header.php');
                                   <option value="OR">Oregon</option>
                                   <option value="WA">Washington</option>
                                 </optgroup>
-                               
-                               
+
+
                               </select>
 
                             </div>
                           </div>
                    <div class="form-group">
-                          
+
                             <div class="col-md-4 col-sm-4 col-xs-12">
                               <select class="select2_group form-control">
                                 <optgroup label="DEPARTMENT OF ADHAR">
@@ -91,8 +100,8 @@ include('header.php');
                                   <option value="OR">Oregon</option>
                                   <option value="WA">Washington</option>
                                 </optgroup>
-                               
-                               
+
+
                               </select>
 
                             </div>
@@ -105,11 +114,11 @@ include('header.php');
                         <thead>
                           <tr class="headings">
                             <th>
-                              
+
                                 <input type="checkbox" id="check-all" class="select" >
 
-                          
-                              
+
+
                             </th>
                             <th class="column-title">Name</th>
                             <th class="column-title">Email</th>
@@ -135,7 +144,7 @@ include('header.php');
                               ?>
                           <tr class="even pointer">
                             <td class="a-center ">
-                              <input type="checkbox" class="record" value="<?=$row['user_id']?>" name="table_records">
+                              <input type="checkbox" class="record" value="<?=$row['user_id']?>" name="table_records" <?php if(isset($_POST['back'])){ if(in_array($row['user_id'], $carray)){echo 'checked';} }   ?>>
                             </td>
                             <td class=" "><?php echo $row['name']; ?></td>
                             <td class=" "><?php echo $row['email']; ?></td>
@@ -150,16 +159,16 @@ include('header.php');
                           </tr>
                           <?php
                             }
-                          
+
                           ?>
                         </tbody>
 
                       </table>
 
                   </div>
-                 
+
                     </div>
-                   
+
 
                 </div>
               </div>
@@ -172,13 +181,13 @@ include('header.php');
                       <li><a href="#">Next</a></li>
                     </ul>
 
-                   <?php if(isset($_POST['Invite'])):?>
+
                               <form action="confirm_invitation.php" method="post">
                             <input type="hidden" value="" id="checkvalue" name="selected">
-                            <input type="text" value="<?=$code?>"  name="meeting_code">
+                            <input type="hidden" value="<?=$code?>"  name="meeting_code">
                             <input type="submit" name="submit" value="next" class="btn btn-success"
                             style="float:right">
-                          </form><?php endif;?> 
+                          </form>
           </div>
         </div>
 <?php include('footer.php'); ?>
@@ -187,16 +196,16 @@ include('header.php');
 
 <script type="text/javascript">
 
-  
 
-  
+
+
   $(document).ready(function(){
 
-    
+
     $(".record").click(function(){
 
-      
-     
+
+
 var val=new Array();
 
       $('.record:checked').each(function(){
@@ -206,17 +215,17 @@ var val=new Array();
       $('.record:not(:checked)').each(function(){
         count++;
       });
-     
+
       if(count!=0)
       {
         $('#check-all').removeAttr('checked');
-       
+
       }
       if(count==0)
       {
-       
+
         $('#check-all').prop('checked',true);
-        
+
       }
 
       $("#checkvalue").val(val);
@@ -226,7 +235,7 @@ var val=new Array();
 
     $('#check-all').click(function(){
 
-     
+
        if($('#check-all').is(":checked"))
       {
           $(".record").each(function(){
@@ -238,10 +247,10 @@ var val=new Array();
         val.push($(this).val());
        $("#checkvalue").val(val);
 
-        
+
       });
 
-     
+
       }
       else
       {
