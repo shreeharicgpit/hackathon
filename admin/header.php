@@ -1,5 +1,6 @@
 <?php
 include('connect.php');
+ob_start();
 session_start();
 if(isset($_SESSION['id']))
 {
@@ -91,7 +92,7 @@ else {
                   <li><a><i class="fa fa-edit"></i> Meeting Managment <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="schedule_meeting.php">Schedule Meeting</a></li>
-                      <li><a href="#">Update Schedule</a></li>
+                      <li><a href="meeting_code">Update Schedule</a></li>
                       <li><a href="#">Generate meeting report</a></li>
                     </ul>
                   </li>

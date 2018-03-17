@@ -1,10 +1,10 @@
 <?php
 include('header.php');
 include('connect.php');
-$_SESSION['meeting_code'];
+$_SESSION['meeting_code']='';
 ?>
 <?php
-  if(isset($_POST('meeting_code')))
+  if(isset($_POST['submit']))
   {
     $meeting_code=$_POST['meeting_code'];
     $sql=mysqli_query($conn,"SELECT * from meeting where meeting_code='$meeting_code'");
@@ -12,7 +12,7 @@ $_SESSION['meeting_code'];
     {
       $result = mysqli_fetch_assoc($sql);
       $_SESSION['meeting_code']=$result['meeting_code'];
-      header(location="meeting_update.php");
+      header('location:meeting_update.php');
     }
     else {
       echo "error in fetch";
@@ -63,3 +63,5 @@ $_SESSION['meeting_code'];
             </div>
           </div>
         </div>
+
+<?php include('footer.php')?>
