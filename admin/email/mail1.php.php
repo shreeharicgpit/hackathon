@@ -15,15 +15,14 @@ if(isset($_POST['submit']))
 		    echo $query1="select * from meeting where meeting_code=$code";
 		    $result1=mysqli_query($conn,$query1);
 		    $row1=mysqli_fetch_assoc($result1);
-		   
 
-		    
-		       
-		    	
+
+
+
+
 				$mail = new PHPMailer;
 				$mail->isSMTP();                                      // Set mailer to use SMTP
-				// $mail -> SMTPDebug = 2;
-				// $mail->Debugoutput = 'html';
+
 				$mail->Host = 'smtp.gmail.com';//mail.manavfashion.com';                       // Specify main and backup server
 				$mail->SMTPAuth = true;                               // Enable SMTP authentication
 				$mail->Username = 'manishvvasaniya@gmail.com'; //customer@manavfashion.com';                   // SMTP username
@@ -53,22 +52,20 @@ if(isset($_POST['submit']))
 				$code=rand(1000,9999);
 				$mail->Subject = "Shree hari meeting";
 				$mail->Body    = $row1['title']."<br>".$row1['date']."<br>".$row1['time']."<br>";
-				
+
 					if(!$mail->send())
 					 {
-					 
 					   die($mail->ErrorInfo);
-					
 					 }
-					
+
 					$_SESSION['code']=$code;
-					
-					
+
+
 
 		}
-		
-	
-	
+
+
+
 
 
 
