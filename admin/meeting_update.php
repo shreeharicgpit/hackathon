@@ -17,7 +17,7 @@ $meeting_code=$_SESSION['meeting_code'];
       if(mysqli_query($conn,$sql))
       {
 
-          echo "<script>alert(\"Meeting updated successfully\")</script>";
+          echo "<script>alert(\"Meeting updated successfully.\")</script>";
 
       }
 
