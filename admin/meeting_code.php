@@ -6,13 +6,20 @@ $_SESSION['meeting_code']='';
 <?php
   if(isset($_POST['submit']))
   {
+
     $meeting_code=$_POST['meeting_code'];
     $sql=mysqli_query($conn,"SELECT * from meeting where meeting_code='$meeting_code'");
     if(mysqli_num_rows($sql)>0)
     {
       $result = mysqli_fetch_assoc($sql);
-      $_SESSION['meeting_code']=$result['meeting_code'];
-      header('location:meeting_update.php');
+      if($result['status']=="Upcomming")
+      {
+        $_SESSION['meeting_code']=$result['meeting_code'];
+        header('location:meeting_update.php');
+      }
+      else {
+        $meeting_staus="Completed";
+      }
     }
     else {
       echo "error in fetch";
@@ -25,13 +32,12 @@ $_SESSION['meeting_code']='';
           <div class="">
             <div class="row">
               <div class="col-md-12">
-                    <div class="x_panel" style="">
-                        <div class="x_title">
-                            <h2>Enter Meeting code</h2>
-
-                            <div class="clearfix"></div>
+                <div class="x_panel" style="">
+                  <div class="x_title">
+                    <h2>Enter Meeting code</h2>
+                      <div class="clearfix"></div>
                         </div>
-                        <div class="x_content">
+                          <div class="x_content">
 
                             <div class="container">
                                 <div class="row">

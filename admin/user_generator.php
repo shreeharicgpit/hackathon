@@ -1,5 +1,5 @@
 <?php
-	
+
 	include('connect.php');
 	$emailarr=array("manishvvasaniya@gmail.com","pethanibhavin004@gmail.com","gauravkarodiya@gmail.com","keyurchandapra1@gmail.com","rajatbeladiya7@gmail.com","adityadoriwala@gmail.com");
 	function randomGenerator($length = 10) {
@@ -13,7 +13,7 @@
 }
 	if(isset($_POST['data'])){
 		$n=$_POST['data'];
-		
+
 		for($i=0;$i<$n;$i++){
 			$mobile = abs(mt_rand(7000000000,9999999999)) ;
 			$name = randomGenerator(5);
@@ -28,9 +28,9 @@
 				$gender="Female";
 			else
 				$gender="Male";
-			
+
 			$address=randomGenerator(13);
-			
+
 			$query="insert into directory (name,designation,email,mobile,state,department,password,gender,address) values ('$name','$designation','$email',$mobile,'$state','$dept','$pass','$gender','$address')";
 			$result=mysqli_query($conn,$query) or die("error in insert");
 
@@ -44,9 +44,9 @@
 	<title>random data generator</title>
 </head>
 <body>
-<form method="POST" action="data_generator.php">
+<form method="POST" action="user_generator.php">
 	Number of data: <input type="number" name="data" />
-	<input type="submit" name="btn" value="Submit">	
+	<input type="submit" name="btn" value="Submit">
 </form>
 </body>
 </html>

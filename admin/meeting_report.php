@@ -5,7 +5,7 @@
 	$result_user="";
 	$row_user="";
 	$meeting_res="";
-
+  $invite=0;
 	$sql1="";
 	$result1="";
 	$row_meeting=array();
@@ -16,6 +16,7 @@
 		$result_user=mysqli_query($conn,"select user_id from attendance where meeting_code='$m_id'");
 
 		$meeting_res=mysqli_query($conn,"select * from meeting where meeting_code='$m_id'");
+    $row_count=mysqli_num_rows($meeting_res);
 		$row_meeting=mysqli_fetch_assoc($meeting_res);
 
 	}
@@ -31,34 +32,29 @@
 	            <div class="x_panel">
 
 
-	              			<form method="POST" class="form-group row" action="meeting_temp.php">
-							  <div class="col-xs-3">
-												<h3>Enter Meeting Id:</h3>
-											    <input class="form-control" name="meeting_id" type="text">
-											  </div>
-							<div>
-							<input type="submit" class="btn btn-md" name="submit" value="submit">
-							</div>
 
-						</form>
-						<br>
+
 						<br>
 
 						<?php
-							if(isset($_POST['meeting_id']))
+							if(isset($_POST['meeting_id']) && $row_count)
 								{
 									echo "<h1>Meeting Details:</h1>";
 							echo "<h4><strong>Title : </strong> " . $row_meeting['title'] . "</h4>";
 							echo "<h4><strong>Description : </strong> " . $row_meeting['description'] . "</h4>";
 							echo "<h4><strong>Date : </strong> " . $row_meeting['date'] . "</h4>";
 							echo "<h4><strong>Time : </strong> " . $row_meeting['time'] . "</h4>";
+
 						}
+            else{
+              echo "<h2>Meeting with specified meeting id doesn't exists.";
+            }
 						?>
 
 
 						<table class="table table-responsive table-striped table-bordered table-hover">
 						<?php
-							if(isset($_POST['meeting_id'])){
+							if(isset($_POST['meeting_id']) && $row_count){
 								echo "<tr>";
 
 								echo "<th>Name</th>";
@@ -79,17 +75,17 @@
 
 									$status=mysqli_query($conn,"select status from attendance where user_id='$user_id' and meeting_code='$m_id'");
 									$res_status=mysqli_fetch_assoc($status);
-									if($res_status['status']==0)
+									if($res_status['status']=="absent")
 										echo "<tr class=\"danger\">";
-									else
+									elseif($res_status['status']=="present")
 										echo "<tr class=\"success\">";
+                  else
+                    echo "<tr class=\"primary\">";
+
 									foreach ($result1 as $key => $value) {
 										echo "<td>";
 										if($key=="attendance"){
-											if($res_status['status']==0)
-												echo "Absent";
-											else
-												echo "Present";
+											echo $res_status['status'];
 										}
 										else{
 											echo "$value";
@@ -104,9 +100,16 @@
 						</table>
 
 	              			</div>
-	              		</div>
 
 
+
+                    <a href="meeting_attendance.php" class="btn btn-primary" role="button">Go Back!</a>
+                    <?php
+                    if($row_count)
+                      echo "<a href=\"generate_pdf.php\" class=\"btn btn-success\" role=\"button\">Generate PDF!</a>";
+                    ?>
+
+               </div>
 	      		</div>
         	</div>
     	</div>

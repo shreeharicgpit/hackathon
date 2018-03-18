@@ -31,7 +31,7 @@ include('connect.php');
                             <div class="container">
                                 <div class="row">
 
-                                    <form method="post" action="meeting_details.php">
+                                    <form method="post" action="add_meeting.php">
 
                                     <div class='col-sm-4'>
                                         Meeting Date
