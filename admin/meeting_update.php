@@ -3,9 +3,6 @@
 ?>
 <?php
 $meeting_code=$_SESSION['meeting_code'];
-$sql=mysqli_query($conn,"select * from meeting where meeting_code='$meeting_code'");
-$result=mysqli_fetch_assoc($sql);
-
 ?>
 <?php
 
@@ -17,8 +14,21 @@ $result=mysqli_fetch_assoc($sql);
       $time=$_POST['meeting_start_time'];
       $venue=$_POST['venue'];
       $sql="update meeting set `title`= '$title',`description`='$description',`date`= '$date',`time`= '$time',`venue`= '$venue' where meeting_code = '$meeting_code'";
-      mysqli_query($conn,$sql);
+      if(mysqli_query($conn,$sql))
+      {
+
+          echo "<script>alert(\"Meeting updated successfully\")</script>";
+
+      }
+
+
   }
+
+?>
+<?php
+$meeting_code=$_SESSION['meeting_code'];
+$sql=mysqli_query($conn,"select * from meeting where meeting_code='$meeting_code'");
+$result=mysqli_fetch_assoc($sql);
 
 ?>
 
