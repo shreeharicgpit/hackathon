@@ -92,7 +92,7 @@ else {
                   <li><a><i class="fa fa-edit"></i> Meeting Managment <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="schedule_meeting.php">Schedule Meeting</a></li>
-                      <li><a href="meeting_code">Update Schedule</a></li>
+                      <li><a href="meeting_update_code.php">Update Schedule</a></li>
                       <li><a href="meeting_attendance_code.php">Generate meeting report</a></li>
                     </ul>
                   </li>
