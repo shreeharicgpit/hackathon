@@ -1,11 +1,11 @@
-<?php include('header.php');
+<?php
+    include('header.php');
       include('connect.php');
 ?>
 <?php
 $meeting_code=$_SESSION['meeting_code'];
 ?>
 <?php
-
   if(isset($_POST['submit']))
   {
       $title=$_POST['meeting_title'];
@@ -51,10 +51,9 @@ $result=mysqli_fetch_assoc($sql);
                                                   <input id="meet_description" required class="form-control" name="meeting_description" value="<?php echo $result['description']; ?>">
 
                                               <label for="meeting_time">Meeting Date* :</label>
-                                              <input type="text" id="meeting_date" class="form-control" name="meeting_date" value="<?php echo $result['date'];?>" required />
-                                            <label for="meeting_time">Meeting Time* :</label>
-                                              <input type="text" id="meeting_start_time" class="form-control" name="meeting_start_time" value="<?php echo $result['time'];?>" required />
-
+                                                <input type='date' class="form-control" name="meeting_date"  value="<?php echo $result['date'];?>"/>
+                                              <label for="meeting_time">Meeting Time* :</label>
+                                                <input type='time' class="form-control" name="meeting_start_time"  value="<?php echo $result['date'];?>"/>
                                                     <label for="place">Place * :</label>
                                               <input type="text" id="place" class="form-control" name="venue" value="<?php echo $result['venue'];?>" required />
                                               <div class="form-group">

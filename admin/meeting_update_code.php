@@ -12,13 +12,13 @@ $_SESSION['meeting_code']='';
     if(mysqli_num_rows($sql)>0)
     {
       $result = mysqli_fetch_assoc($sql);
-      if($result['status']=="Upcomming")
+      if($result['status']=="Upcoming")
       {
         $_SESSION['meeting_code']=$result['meeting_code'];
         header('location:meeting_update.php');
       }
       else {
-        $meeting_staus="Completed";
+        header('location:meeting_update_code.php');
       }
     }
     else {

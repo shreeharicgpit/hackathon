@@ -1,5 +1,5 @@
 <?php
-	
+
 	include('connect.php');
 	function randomGenerator($length = 10) {
     $characters = 'abcdefghijklmnopqrstuvwxyz';
@@ -12,7 +12,7 @@
 }
 	if(isset($_POST['data'])){
 		$n=$_POST['data'];
-		
+
 		for($i=0;$i<$n;$i++){
 			$title = randomGenerator(5);
 			$description=randomGenerator(5);
@@ -20,7 +20,7 @@
 			$time=rand(0,23) . ":" . rand(0,60) . ":" . rand(0,60);
 			$status="Upcoming";
 			$keypoint=randomGenerator(7);
-			
+
 			$query="insert into meeting (title,description,date,time,status,keypoint) values ('$title','$description','$date','$time','$status','$keypoint')";
 			$result=mysqli_query($conn,$query) or die("error in insert");
 
@@ -36,7 +36,7 @@
 <body>
 <form method="POST" action="meeting_generator.php">
 	Number of data: <input type="number" name="data" />
-	<input type="submit" name="btn" value="Submit">	
+	<input type="submit" name="btn" value="Submit">
 </form>
 </body>
 </html>
