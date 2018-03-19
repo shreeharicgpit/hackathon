@@ -6,6 +6,7 @@
 	$row_user="";
 	$meeting_res="";
   $invite=0;
+	$row_count=0;
 	$sql1="";
 	$result1="";
 	$row_meeting=array();
@@ -14,7 +15,6 @@
 	{
 		$m_id=$_POST['meeting_id'];
 		$result_user=mysqli_query($conn,"select user_id from attendance where meeting_code='$m_id'");
-
 		$meeting_res=mysqli_query($conn,"select * from meeting where meeting_code='$m_id'");
     $row_count=mysqli_num_rows($meeting_res);
 		$row_meeting=mysqli_fetch_assoc($meeting_res);
@@ -37,13 +37,13 @@
 						<br>
 
 						<?php
-							if(isset($_POST['meeting_id']) && $row_count)
-								{
-									echo "<h1>Meeting Details:</h1>";
+							if(isset($_POST['meeting_code']) && $row_count)
+							{
+							echo "<h1>Meeting Details:</h1>";
 							echo "<h4><strong>Title : </strong> " . $row_meeting['title'] . "</h4>";
 							echo "<h4><strong>Description : </strong> " . $row_meeting['description'] . "</h4>";
 							echo "<h4><strong>Date : </strong> " . $row_meeting['date'] . "</h4>";
-							echo "<h4><strong>Time : </strong> " . $row_meeting['time'] . "</h4>";
+							echo "<h4><strong>Time : </strong> " . $row_meeting['time'] ."</h4>";
 
 						}
             else{
@@ -54,7 +54,7 @@
 
 						<table class="table table-responsive table-striped table-bordered table-hover">
 						<?php
-							if(isset($_POST['meeting_id']) && $row_count){
+							if(isset($row_count)){
 								echo "<tr>";
 
 								echo "<th>Name</th>";
@@ -103,7 +103,7 @@
 
 
 
-                    <a href="meeting_attendance.php" class="btn btn-primary" role="button">Go Back!</a>
+                    <a href="meeting_attendance_code.php" class="btn btn-primary" role="button">Go Back!</a>
                     <?php
                     if($row_count)
                       echo "<a href=\"generate_pdf.php\" class=\"btn btn-success\" role=\"button\">Generate PDF!</a>";
@@ -113,8 +113,7 @@
 	      		</div>
         	</div>
     	</div>
-    </div>
-</div>
+
 <?php
 include('footer.php');
 ?>
