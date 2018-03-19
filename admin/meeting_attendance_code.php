@@ -1,9 +1,20 @@
 <?php
 	include('connect.php');
 	include('header.php');
-
 ?>
+<?php
+if(isset($_POST['submit']))
+{
+	$meeting_code=$_POST['meeting_attendance_code'];
+	$sql=mysqli_query($conn,"select * from meeting where meeting_id='$meeting_code'");
+	$result=mysqli_fetch_assoc($sql);
+	if($result['status']=='Upcoming')
+	{
+		
+	}
 
+}
+?>
 <div class="right_col" role="main">
         <div class="clearfix"></div>
         	<div class="row">
@@ -12,7 +23,7 @@
 								<form method="POST" class="form-group row" action="meeting_report.php">
 							  	<div class="col-xs-3">
 												<h3>Enter Meeting Id:</h3>
-											    <input class="form-control" name="meeting_id" type="text">
+											    <input class="form-control" name="meeting_attendance_code" type="text">
 											  </div>
 							<div>
 							<input type="submit" class="btn btn-primary btn-md" name="submit" value="Get Details">
