@@ -1,8 +1,6 @@
 <?php
 include('header.php');
   include('connect.php');
-
-
   if(isset($_POST['Invite']))
   {
   	$meeting_date=$_POST['meeting_date'];
@@ -13,7 +11,7 @@ include('header.php');
   	$place=$_POST['place'];
   	$state=$_POST['state'];
   	$city=$_POST['city'];
-     $date=date("Y-m-d");
+    $date=date("Y-m-d");
    $expire_time = strtotime($date);
   $today_time = strtotime($meeting_date);
   	if($today_time < $expire_time)

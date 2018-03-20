@@ -44,6 +44,8 @@
 							echo "<h4><strong>Description : </strong> " . $row_meeting['description'] . "</h4>";
 							echo "<h4><strong>Date : </strong> " . $row_meeting['date'] . "</h4>";
 							echo "<h4><strong>Time : </strong> " . $row_meeting['time'] ."</h4>";
+							echo "<h4><strong>Status : </strong> " . $row_meeting['status'] ."</h4>";
+
 							if($row_meeting['status']=='Completed')
 							{
 							?>
@@ -57,8 +59,6 @@
 								echo "<th>Designation</th>";
 								echo "<th>Email</th>";
 								echo "<th>Mobile No.</th>";
-
-
 								echo "<th>Attendance</th>";
 									echo "<th>State</th>";
 
@@ -92,21 +92,47 @@
 									}
 									echo "</tr>";
 								  }
-
-
 						?>
+					</table>
 					<?php
+						}
+						else {?>
+							<table class="table table-responsive table-striped table-bordered table-hover">
+								<caption><h2>Invited Official</h2></caption>
+							<?php
+							echo "<tr>";
+							echo "<th>Name</th>";
+							echo "<th>Department</th>";
+							echo "<th>Designation</th>";
+							echo "<th>Email</th>";
+							echo "<th>Mobile No.</th>";
+							echo "</tr>";
+							while($row_user=mysqli_fetch_assoc($result_user)){
+								$user_id=$row_user['user_id'];
+								$sql1=mysqli_query($conn,"select name,department,designation,email,mobile from directory where user_id='$user_id'");
+								$result1=mysqli_fetch_assoc($sql1);
+								$status=mysqli_query($conn,"select status from attendance where user_id='$user_id' and meeting_code='$m_id'");
+								$res_status=mysqli_fetch_assoc($status);
+										  echo "<tr class=\"primary\">";
+								foreach ($result1 as $key => $value) {
+									echo "<td>";
+
+										echo "$value";
+
+									echo "</td>";
+								}
+								echo "</tr>";
+								}
+					?>
+						</table>
+						<?php
 						}
 					}
 					else{
 						echo "<h2>Meeting with specified meeting id doesn't exists.";
 					}
 					?>
-						</table>
-
-	              			</div>
-
-
+						              			</div>
 
                     <a href="meeting_attendance_code.php" class="btn btn-primary" role="button">Go Back!</a>
                     <?php
