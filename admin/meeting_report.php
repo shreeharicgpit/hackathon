@@ -11,14 +11,14 @@
 	$result1="";
 	$row_meeting=array();
 	$temp=array();
-	if(isset($_POST['meeting_id']))
+
+	if(isset($_POST['meeting_attendance_code']))
 	{
-		$m_id=$_POST['meeting_id'];
+		$m_id=$_POST['meeting_attendance_code'];
 		$result_user=mysqli_query($conn,"select user_id from attendance where meeting_code='$m_id'");
 		$meeting_res=mysqli_query($conn,"select * from meeting where meeting_code='$m_id'");
     $row_count=mysqli_num_rows($meeting_res);
 		$row_meeting=mysqli_fetch_assoc($meeting_res);
-
 	}
 ?>
 <div class="right_col" role="main">
@@ -37,24 +37,19 @@
 						<br>
 
 						<?php
-							if(isset($_POST['meeting_code']) && $row_count)
+							if(isset($_POST['meeting_attendance_code']) && $row_count)
 							{
-							echo "<h1>Meeting Details:</h1>";
+							echo "<h1><center>Meeting Details:</center></h1>";
 							echo "<h4><strong>Title : </strong> " . $row_meeting['title'] . "</h4>";
 							echo "<h4><strong>Description : </strong> " . $row_meeting['description'] . "</h4>";
 							echo "<h4><strong>Date : </strong> " . $row_meeting['date'] . "</h4>";
 							echo "<h4><strong>Time : </strong> " . $row_meeting['time'] ."</h4>";
+							if($row_meeting['status']=='Completed')
+							{
+							?>
+								<table class="table table-responsive table-striped table-bordered table-hover">
+								<?php
 
-						}
-            else{
-              echo "<h2>Meeting with specified meeting id doesn't exists.";
-            }
-						?>
-
-
-						<table class="table table-responsive table-striped table-bordered table-hover">
-						<?php
-							if(isset($row_count)){
 								echo "<tr>";
 
 								echo "<th>Name</th>";
@@ -72,20 +67,23 @@
 									$user_id=$row_user['user_id'];
 									$sql1=mysqli_query($conn,"select name,department,designation,email,mobile,attendance,state from directory where user_id='$user_id'");
 									$result1=mysqli_fetch_assoc($sql1);
-
 									$status=mysqli_query($conn,"select status from attendance where user_id='$user_id' and meeting_code='$m_id'");
 									$res_status=mysqli_fetch_assoc($status);
-									if($res_status['status']=="absent")
-										echo "<tr class=\"danger\">";
-									elseif($res_status['status']=="present")
-										echo "<tr class=\"success\">";
-                  else
-                    echo "<tr class=\"primary\">";
 
+									if($res_status['status']=="present")
+										echo "<tr class=\"success\">";
+								 else
+											echo "<tr class=\"danger\">";
 									foreach ($result1 as $key => $value) {
 										echo "<td>";
 										if($key=="attendance"){
-											echo $res_status['status'];
+											if($res_status['status']=='present')
+											{
+												echo "present";
+											}
+											else {
+												echo "absent";
+											}
 										}
 										else{
 											echo "$value";
@@ -95,8 +93,15 @@
 									echo "</tr>";
 								  }
 
-							}
+
 						?>
+					<?php
+						}
+					}
+					else{
+						echo "<h2>Meeting with specified meeting id doesn't exists.";
+					}
+					?>
 						</table>
 
 	              			</div>
