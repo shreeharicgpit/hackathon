@@ -1,5 +1,4 @@
-<?php
-
+  <?php
 	include('connect.php');
 	function randomGenerator($length = 10) {
     $characters = 'abcdefghijklmnopqrstuvwxyz';
