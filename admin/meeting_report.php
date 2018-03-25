@@ -9,13 +9,26 @@
 	$row_count=0;
 	$sql1="";
 	$result1="";
-	$_SESSION['meeting_code']=$_POST['meeting_attendance_code'];
+	if(isset($_POST['meeting_attendance_code'])){
+		$_SESSION['meeting_code']=$_POST['meeting_attendance_code'];
+	}
+	elseif (isset($_GET['id'])) {
+		$_SESSION['meeting_code']=$_GET['id'];
+
+	}
 	$row_meeting=array();
 	$temp=array();
 
 	if(isset($_POST['meeting_attendance_code']))
 	{
 		$m_id=$_POST['meeting_attendance_code'];
+		$result_user=mysqli_query($conn,"select user_id from attendance where meeting_code='$m_id'");
+		$meeting_res=mysqli_query($conn,"select * from meeting where meeting_code='$m_id'");
+    $row_count=mysqli_num_rows($meeting_res);
+		$row_meeting=mysqli_fetch_assoc($meeting_res);
+	}
+		if(isset($_GET['id'])){
+		$m_id=$_GET['id'];
 		$result_user=mysqli_query($conn,"select user_id from attendance where meeting_code='$m_id'");
 		$meeting_res=mysqli_query($conn,"select * from meeting where meeting_code='$m_id'");
     $row_count=mysqli_num_rows($meeting_res);
@@ -35,7 +48,7 @@
 						<br>
 
 						<?php
-							if(isset($_POST['meeting_attendance_code']) && $row_count)
+							if(isset($_POST['meeting_attendance_code']) || $_GET['id'] && $row_count)
 							{
 							echo "<h1><center>Meeting Details:</center></h1>";
 							echo "<h4><strong>Title : </strong> " . $row_meeting['title'] . "</h4>";

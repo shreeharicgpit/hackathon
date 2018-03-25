@@ -21,13 +21,16 @@ $pdf->AddPage();
 //foter page
 
 $pdf->SetFont('Arial','B',16);
+
+
+
 $pdf->Cell(0,10,"Meeting report",0,1,'C');
 $pdf->Ln();
 $pdf->Cell(0,10,"Details",1,1,'C');
 $pdf->Ln();
 foreach ($temp as $key => $value) {
 $pdf->Cell(50,10,$key,1,0,'C');
-$pdf->Cell(50,10,$value,1,1,'C');
+$pdf->Cell(100,10,$value,1,1,'C');
 }
 $pdf->Ln();
 
@@ -53,8 +56,6 @@ $pdf->Cell(40,10,"Mobile",1,0,'C');
 $pdf->Cell(35,10,"Attendance",1,1,'C');
 
 
-
-
   $pdf->SetFont('Arial','I',10);
 while($row_user=mysqli_fetch_assoc($result_user)){
   $user_id=$row_user['user_id'];
@@ -62,14 +63,26 @@ while($row_user=mysqli_fetch_assoc($result_user)){
   $result1=mysqli_fetch_assoc($sql1);
   $status=mysqli_query($conn,"select status from attendance where user_id='$user_id' and meeting_code='$meeting_code'");
   $res_status=mysqli_fetch_assoc($status);
+  if($res_status['status']=="present")
+      {
+        $pdf->SetFillColor(0, 255, 0);
 
-  $pdf->Cell(20,10,$result1['user_id'],1,0,'C');
-  $pdf->Cell(60,10,$result1['name'],1,0,'C');
-  $pdf->Cell(35,10,$result1['department'],1,0,'C');
-  $pdf->Cell(35,10,$result1['designation'],1,0,'C');
-  $pdf->Cell(55,10,$result1['email'],1,0,'C');
-  $pdf->Cell(40,10,$result1['mobile'],1,0,'C');
-  $pdf->Cell(35,10,$res_status['status'],1,1,'C');
+      }
+    else{
+      $pdf->SetFillColor(255, 0, 0);
+
+    }
+
+  $pdf->Cell(20,10,$result1['user_id'],1,0,'C',true);
+  $pdf->Cell(60,10,$result1['name'],1,0,'C',true);
+  $pdf->Cell(35,10,$result1['department'],1,0,'C',true);
+  $pdf->Cell(35,10,$result1['designation'],1,0,'C',true);
+  $pdf->Cell(55,10,$result1['email'],1,0,'C',true);
+  $pdf->Cell(40,10,$result1['mobile'],1,0,'C',true);
+
+
+
+  $pdf->Cell(35,10,$res_status['status'],1,1,'C',true);
 
 }
 
